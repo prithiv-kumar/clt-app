@@ -10,7 +10,7 @@ const postlive = require('../controllers/driver/postlive.js');
 const getlive = require('../controllers/driver/getlive.js');
 const tripfilter = require('../controllers/customer_info/tripfilter.js');
 const admin_post = require('../controllers/admin/adminpost.js');
-const admin_login = require('../controllers/admin/adminlog.js');
+// const admin_login = require('../controllers/admin/adminlog.js');
 module.exports = function(app) {
   
     app.post('/register', register.register);
@@ -21,7 +21,7 @@ module.exports = function(app) {
     app.put('/customerupdate', customer_update.updateCustomer);
 
     app.post('/adminpost', admin_post.register);
-    app.post('/adminlogin', admin_login.login);
+    // app.post('/adminlogin', admin_login.login);
     
     app.get('/trip/:userId', tripfilter.gettripfilter);
     app.get('/trip/:userId', trip.getTripDetails );
