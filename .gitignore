@@ -1,0 +1,14 @@
+# Ignore the node_modules directory
+node_modules/
+
+# Ignore the .env file to prevent committing sensitive information
+.env
+
+# Ignore any potential backup of the .env file
+.env.bak
+
+# Ignore potential temporary files created by the dotenv package
+.env.*
+
+# Ignore the service account key JSON file (if it still exists)
+serviceAccountkey.json
