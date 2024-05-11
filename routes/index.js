@@ -11,6 +11,8 @@ const getlive = require('../controllers/driver/getlive.js');
 const tripfilter = require('../controllers/customer_info/tripfilter.js');
 const admin_post = require('../controllers/admin/adminpost.js');
 const alldriver = require('../controllers/admin/getdriver.js');
+const ebill = require('../controllers/admin/getbill.js');
+const cors = require('cors')
 // const admin_login = require('../controllers/admin/adminlog.js');
 module.exports = function(app) {
   
@@ -25,14 +27,14 @@ module.exports = function(app) {
 
     //admin accnt creation
     app.post('/adminpost', admin_post.register);
-    // app.post('/adminlogin', admin_login.login);
+    app.get('/getebills', cors(), ebill.getbill);
     
     app.get('/trip/:userId', tripfilter.gettripfilter);
-    app.get('/trip/:userId', trip.getTripDetails );
+    // app.get('/trip/:userId', trip.getTripDetails );
     app.get('/userdetails/:userId', user_details.getUserDetails)
 
     //admin
-    app.get('/drivers', alldriver.getUserDetails)
+    app.get('/drivers',cors(), alldriver.getUserDetails)
 
     app.post('/postlive', postlive.postlive)
     app.get('/getlive/:userId', getlive.getlive)
