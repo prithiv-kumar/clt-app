@@ -12,6 +12,7 @@ const tripfilter = require('../controllers/customer_info/tripfilter.js');
 const admin_post = require('../controllers/admin/adminpost.js');
 const alldriver = require('../controllers/admin/getdriver.js');
 const ebill = require('../controllers/admin/getbill.js');
+const getdriverrev = require('../controllers/admin/getdriverrev.js');
 const cors = require('cors')
 // const admin_login = require('../controllers/admin/adminlog.js');
 module.exports = function(app) {
@@ -28,6 +29,7 @@ module.exports = function(app) {
     //admin accnt creation
     app.post('/adminpost', admin_post.register);
     app.get('/getebills', cors(), ebill.getbill);
+    app.get('/getdriverrev', cors(), getdriverrev.getdriverrev);
     
     app.get('/trip/:userId', tripfilter.gettripfilter);
     // app.get('/trip/:userId', trip.getTripDetails );
