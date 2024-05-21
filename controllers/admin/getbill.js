@@ -61,7 +61,7 @@ const firestore = require('../../db'); // Assuming connection setup elsewhere
 const usersCollection = firestore.collection('users');
 const tripsCollection = firestore.collection('customers'); // Assuming 'customers' collection stores trip data
 
-const PAGE_SIZE = 3; // Adjust this value to define the number of trips per page
+const PAGE_SIZE = 10; // Adjust this value to define the number of trips per page
 
 const getbill = async (req, res) => {
   try {

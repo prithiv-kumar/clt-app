@@ -1,7 +1,9 @@
 
 
-// const admin = require('firebase-admin');
 
+// const PAGE_SIZE = 10; // Adjust this value to define the number of drivers per page
+
+// const admin = require('firebase-admin');
 // const firestore = require('../../db'); // Assuming connection setup elsewhere
 
 // const usersCollection = firestore.collection('users');
@@ -9,6 +11,9 @@
 
 // const getUserDetails = async (req, res) => {
 //   try {
+//     const page = parseInt(req.query.page) || 1; // Get the page number from query parameter (default 1)
+//     const limit = PAGE_SIZE;
+
 //     const snapshot = await usersCollection.get();
 //     const tripSnapshot = await trips.get();
 
@@ -24,14 +29,15 @@
 //       const data = doc.data();
 
 //       // Check if the user is a driver (assuming a 'driver' field)
-//       if (data ) { // Check for both driver field and its truthy value
+//       if (data) { // Check for both driver field and its truthy value
 //         driverCount++;
-//         DriverData.push({ name: data.fullname,
+//         DriverData.push({
+//           name: data.fullname,
 //           uid: data.uid,
 //           email: data.email,
 //           phone: data.phone,
 //           veh_model: data.vehicle_make_model,
-//          }); // Add name to user data object
+//         }); // Add name to user data object
 
 //         if (data.status === "Vehicle data added") {
 //           pending++;
@@ -39,6 +45,11 @@
 //       }
 //     }
 
+//     // Implement pagination
+//     const totalDrivers = DriverData.length;
+//     const paginatedDrivers = DriverData.slice((page - 1) * limit, page * limit);
+//     const nextPage = page * limit < totalDrivers;
+    
 //     for (const doc of tripSnapshot.docs) {
 //       const data2 = doc.data();
 
@@ -58,7 +69,8 @@
 //         trips: tripscount,
 //         revenue: revenue,
 //         pending: pending,
-//         Driverdata: DriverData, // Include allUserData with names
+//         Driverdata: paginatedDrivers, // Include paginated DriverData
+//         nextPage: nextPage ? page + 1 : false, // Indicate if there is a next page
 //       },
 //     });
 //   } catch (error) {
@@ -118,7 +130,7 @@ const getUserDetails = async (req, res) => {
     const totalDrivers = DriverData.length;
     const paginatedDrivers = DriverData.slice((page - 1) * limit, page * limit);
     const nextPage = page * limit < totalDrivers;
-
+    
     for (const doc of tripSnapshot.docs) {
       const data2 = doc.data();
 
@@ -139,7 +151,7 @@ const getUserDetails = async (req, res) => {
         revenue: revenue,
         pending: pending,
         Driverdata: paginatedDrivers, // Include paginated DriverData
-        nextPage: nextPage ? page + 1 : false, // Indicate if there is a next page
+        nextPage: nextPage, // Indicate if there is a next page with a boolean value
       },
     });
   } catch (error) {
