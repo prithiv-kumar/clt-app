@@ -30,7 +30,7 @@ const status = async (req, res) => {
 
     res.send({
       success: true,
-      message: 'User location posted. .',
+      message: 'Driver status posted. .',
     });
   } catch (error) {
     console.error(error);
