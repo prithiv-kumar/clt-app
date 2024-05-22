@@ -14,6 +14,8 @@ const alldriver = require('../controllers/admin/getdriver.js');
 const ebill = require('../controllers/admin/getbill.js');
 const getdriverrev = require('../controllers/admin/getdriverrev.js');
 const getloc = require('../controllers/admin/getloc.js');
+const poststatus = require('../controllers/upload/docstatus.js');
+const updatestatus = require('../controllers/upload/updatedstatus.js');
 const cors = require('cors')
 // const admin_login = require('../controllers/admin/adminlog.js');
 module.exports = function(app) {
@@ -22,7 +24,8 @@ module.exports = function(app) {
     app.post('/register', register.register);
     app.put('/updateregister', updatereg.updateUserDetails);
     app.post('/upload', upload.uploadFiles);
-
+    app.post('/poststatus', poststatus.status);
+    app.put('/updatestatus',cors(), updatestatus.updateStatus);
     //customer data added and updated
     app.post('/customerinfo', customer_info.customer_info);
     app.put('/customerupdate', customer_update.updateCustomer);
