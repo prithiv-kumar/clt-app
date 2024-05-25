@@ -16,6 +16,8 @@ const getdriverrev = require('../controllers/admin/getdriverrev.js');
 const getloc = require('../controllers/admin/getloc.js');
 const poststatus = require('../controllers/upload/docstatus.js');
 const updatestatus = require('../controllers/upload/updatedstatus.js');
+const postfare = require('../controllers/customer_info/postfare.js');
+const getfare = require('../controllers/customer_info/getfare.js');
 const cors = require('cors')
 // const admin_login = require('../controllers/admin/adminlog.js');
 module.exports = function(app) {
@@ -45,4 +47,7 @@ module.exports = function(app) {
 
     app.post('/postlive', postlive.postlive)
     app.get('/getlive/:userId', getlive.getlive)
+
+    app.post('/postfares', postfare.postfare)
+    app.get('/getfares', getfare.getfare)
 };
