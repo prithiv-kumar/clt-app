@@ -24,7 +24,7 @@ const getUserDetails = async (req, res) => {
     statusSnapshot.forEach(doc => {
       userData2 = doc.data();
       if (userData2.uid === userId){
-        mergedData = { ...userData, ...userData2 };
+        userData = { ...userData, ...userData2 };
       }
     });
     
@@ -38,7 +38,7 @@ const getUserDetails = async (req, res) => {
 
     res.send({
       success: true,
-      data: mergedData
+      data: userData
     });
   } catch (error) {
     console.error(error);
