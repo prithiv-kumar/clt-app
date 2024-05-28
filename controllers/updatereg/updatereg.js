@@ -42,7 +42,7 @@ const updateUserDetails = async (req, res) => {
       carPhoto2 : [],
       carPhoto3 : [],
       carPhoto4 : [],
-      validEmiratesPass : [],
+      // validEmiratesPass : [],
       RtaRegVehicle: [],
 
       

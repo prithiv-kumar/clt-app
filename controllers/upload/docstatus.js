@@ -19,7 +19,7 @@ const status = async (req, res) => {
             carPhoto2_status: "waiting",
             carPhoto3_status: "waiting",
             carPhoto4_status: "waiting",
-            validEmiratesPass_status: "waiting",
+            // validEmiratesPass_status: "waiting",
             RtaRegVehicle_status: "waiting",
             uid
     };
