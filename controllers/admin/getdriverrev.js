@@ -58,6 +58,7 @@ const getdriverrev = async (req, res) => {
 
       driverData.push({
         email: email,
+        uid: uid,
         fullname: fullname,
         veh_model: veh_model,
         phone: phone,

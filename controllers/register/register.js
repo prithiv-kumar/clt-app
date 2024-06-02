@@ -21,6 +21,7 @@ const register = async (req, res) => {
       rta_vehicle_no : "",
       vehicle_make_model : "",
       vehicle_color : "",
+      vehicle_type : "",
       validRtaCard : [],
       driverProfilePhoto : [],
       validEmiratesId : [],

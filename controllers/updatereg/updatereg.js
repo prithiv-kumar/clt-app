@@ -9,14 +9,16 @@ const updateUserDetails = async (req, res) => {
       license_type,
       rta_vehicle_no,
       vehicle_make_model,
-      vehicle_color, uid } = req.body;
+      vehicle_color,vehicle_type, uid } = req.body;
 
     // Validate if all required fields are present
     if ( !rta_card_no 
       || !license_type
       || !rta_vehicle_no
       || !vehicle_make_model
-      || !vehicle_color || !uid) {
+      || !vehicle_color 
+      || !vehicle_type
+      || !uid) {
       return res.status(400).send({ message: 'Missing required fields' });
     }
 
@@ -34,6 +36,7 @@ const updateUserDetails = async (req, res) => {
       rta_vehicle_no,
       vehicle_make_model,
       vehicle_color,
+      vehicle_type,
       status: 'Vehicle data added',
       validRtaCard : [],
       driverProfilePhoto : [],
