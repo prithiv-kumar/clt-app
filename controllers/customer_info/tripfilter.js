@@ -107,7 +107,7 @@ const gettripfilter = async (req, res) => {
 
     
     if (snapshot.empty) {
-      return res.send({ success: true,data: userData, });
+      return res.send({ success: true,data: userData, todayrev: todayrev});
     }
 
     // let userData = [];
