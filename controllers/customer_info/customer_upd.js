@@ -107,7 +107,7 @@ const updateCustomer = async (req, res) => {
         Payment_method,
         Travel_distance,
         dest_time: dubaiTimeFormatted,
-        status: 'Trip completed',
+        status: 'approved',
         billNumber: newBillNumber,
       });
     });
