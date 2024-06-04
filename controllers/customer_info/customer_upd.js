@@ -107,13 +107,21 @@ const updateCustomer = async (req, res) => {
         Payment_method,
         Travel_distance,
         dest_time: dubaiTimeFormatted,
-        status: 'approved',
+        status: 'trip completed',
         billNumber: newBillNumber,
       });
     });
 
     // Update users collection (same as before)
-
+      
+        const userQuerySnapshot = await usersCollection.where('uid', '==', uid).get();
+        if (!userQuerySnapshot.empty) {
+          const userDocRef = userQuerySnapshot.docs[0].ref;
+          await userDocRef.update({ status: 'approved' });
+        } else {
+          console.error('User not found with uid:', uid);
+          return res.status(404).send({ message: 'User not found' });
+        }
     // Return success response with bill number
     return res.status(200).send({
       success: true,

@@ -31,6 +31,15 @@ const register = async (req, res) => {
       carPhoto4 : [],
       // validEmiratesPass : [],
       RtaRegVehicle: [],
+      validRtaCard_status: "",
+      driverProfilePhoto_status: "",
+      validEmiratesId_status: "",
+      carPhoto1_status: "",
+      carPhoto2_status: "",
+      carPhoto3_status: "",
+      carPhoto4_status: "",
+      // validEmiratesPass_status: "",
+      RtaRegVehicle_status: "",
     };
 
     
