@@ -88,6 +88,10 @@ const gettripfilter = async (req, res) => {
         console.warn(`User with UID not found in trips collection.`);
       }
 
+      // const todayrev = revenue.toFixed(2); // Convert to string with two decimal places
+       // Calculate todayrev with two decimal places using Math.round and scaling
+    const revenueInCents = Math.round((revenue * 100)); // Multiply by 100 to convert to cents
+    const todayrev = revenueInCents / 100; // Divide back to get revenue with two decimal places
 
 
 
@@ -116,7 +120,7 @@ const gettripfilter = async (req, res) => {
     res.send({
       success: true,
       data: userData,
-      todayrev: revenue,
+      todayrev: todayrev,
     });
   } catch (error) {
     console.error(error);

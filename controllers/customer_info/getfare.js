@@ -146,12 +146,18 @@ const getfare = async (req, res) => {
     }
 
     const Totalfare = Basefare + ((0.8 * rideTime) + (costpkm * distance));
+  
+   
+    // Calculate todayrev with two decimal places using Math.round and scaling
+    const revenueInCents = Math.round((Totalfare * 100)); // Multiply by 100 to convert to cents
+    const totalrev = revenueInCents / 100; // Divide back to get revenue with two decimal places
 
     res.send({
       success: true,
       timeClassification: timeClassification,
       currentTime: currenttime,
-      Totalfare: Totalfare
+      Totalfare: totalrev 
+      // Totalfare: Totalfare
     });
   } catch (error) {
     console.error(error);

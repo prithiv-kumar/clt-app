@@ -41,11 +41,11 @@ const updateCustomer = async (req, res) => {
       // Update user details with incremented bill number
       const userDocRef = userSnapshot.docs[0].ref;
 
-        // Parse Additional_fares to a double (assuming it's a string)
-        const additionalFaresDouble = parseFloat(Additional_fares);
+        // // Parse Additional_fares to a double (assuming it's a string)
+        // const additionalFaresDouble = parseFloat(Additional_fares);
 
         // Calculate total fare if needed (assuming Trip_fare is also a string)
-        const totalFareDouble = parseFloat(Trip_fare);
+        // const totalFareDouble = parseFloat(Trip_fare);
 
       await transaction.update(userDocRef, {
         Trip_fare: totalFareDouble,
