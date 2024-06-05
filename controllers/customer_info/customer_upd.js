@@ -48,8 +48,8 @@ const updateCustomer = async (req, res) => {
         // const totalFareDouble = parseFloat(Trip_fare);
 
       await transaction.update(userDocRef, {
-        Trip_fare: totalFareDouble,
-        Additional_fares: additionalFaresDouble,
+        Trip_fare,
+        Additional_fares,
         Payment_method,
         Travel_distance,
         dest_time: dubaiTimeFormatted,

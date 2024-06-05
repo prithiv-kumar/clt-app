@@ -36,13 +36,22 @@ const getdriverrev = async (req, res) => {
 
       let trip = 0;
       let revenue = 0;
+      let uid = "";
+      let fullname= "", email= ""; 
+      let veh_model="";
+      let phone= "";
+       const driver = driverDoc.data();
+      //  uid = driver.uid; // Get the UID from the driver document
+      //  fullname = driver.fullname;
+      //  email = driver.email;
+      //  veh_model = driver.vehicle_make_model;
+      //  phone = driver.phone;
 
-      const driver = driverDoc.data();
-      const uid = driver.uid; // Get the UID from the driver document
-      const fullname = driver.fullname;
-      const email = driver.email;
-      const veh_model = driver.vehicle_make_model;
-      const phone = driver.phone;
+      uid = driver.uid || ""; // Use default empty string if uid is missing
+      fullname = driver.fullname || ""; // Use default empty string if fullname is missing
+      email = driver.email || ""; // Use default empty string if email is missing
+      veh_model = driver.vehicle_make_model || ""; // Use default empty string if vehicle_make_model is missing
+      phone = driver.phone || ""; // Use default empty string if phone is missing
 
       const userSnapshot = await tripsCollection.where('uid', '==', uid).get(); // Fetch matching user data
 
@@ -64,6 +73,7 @@ const getdriverrev = async (req, res) => {
         phone: phone,
         trips: trip,
         revenue: revenue,
+        company: ""
       });
     }
 
