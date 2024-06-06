@@ -19,6 +19,7 @@ const updatestatus = require('../controllers/upload/updatedstatus.js');
 const postfare = require('../controllers/customer_info/postfare.js');
 const getfare = require('../controllers/customer_info/getfare.js');
 const alltrip = require('../controllers/admin/alltrip.js');
+const getfilter = require('../controllers/admin/getfilter.js');
 const cors = require('cors')
 // const admin_login = require('../controllers/admin/adminlog.js');
 module.exports = function(app) {
@@ -39,6 +40,7 @@ module.exports = function(app) {
     app.get('/getdriverrev', cors(), getdriverrev.getdriverrev);
     app.get('/getloc', cors(), getloc.getloc);
     app.get('/alltrip/:userId', alltrip.getalltrips);
+    app.get('/getfilter', getfilter.getfilter);
     
     app.get('/trip/:userId', tripfilter.gettripfilter);
     // app.get('/trip/:userId', trip.getTripDetails );
