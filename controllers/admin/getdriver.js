@@ -1,5 +1,3 @@
-
-
 const PAGE_SIZE = 10; // Adjust this value to define the number of drivers per page
 
 const admin = require('firebase-admin');
@@ -29,9 +27,7 @@ const getUserDetails = async (req, res) => {
           }
         }
       });
-    }
-
-    else if (statusQuery === 'rejected') {
+    } else if (statusQuery === 'rejected') {
       const statusSnapshot = await statusCollection.get();
       statusSnapshot.forEach(doc => {
         const data = doc.data();
@@ -43,8 +39,10 @@ const getUserDetails = async (req, res) => {
         }
       });
     }
+
     const snapshot = await usersCollection.get();
     const tripSnapshot = await trips.get();
+    const statusSnapshot = await statusCollection.get(); // Fetch status collection
 
     // Create an empty array to store user data with name
     let DriverData = [];
@@ -53,14 +51,33 @@ const getUserDetails = async (req, res) => {
     let revenue = 0;
     let pending = 0;
 
+    // Create a map to store success count for each driver UID
+    let successCountMap = {};
+
+    // Process the status collection to count success statuses for each driver UID
+    statusSnapshot.forEach(doc => {
+      const data = doc.data();
+      const uid = data.uid;
+
+      if (!successCountMap[uid]) {
+        successCountMap[uid] = 0;
+      }
+
+      for (const key in data) {
+        if (key.endsWith('_status') && data[key] === 'success') {
+          successCountMap[uid]++;
+        }
+      }
+    });
+
     // Loop through each document in the snapshot
     for (const doc of snapshot.docs) {
       const data = doc.data();
 
       // Check if the user data matches the status and other filters
       if (data) {
-        if (statusQuery === 'onhold') {
-          // If filtering by onhold status, check if the UID is in the driverUIDs array
+        if (statusQuery === 'onhold' || statusQuery === 'rejected') {
+          // If filtering by onhold or rejected status, check if the UID is in the driverUIDs array
           if (driverUIDs.includes(data.uid)) {
             driverCount++;
             DriverData.push({
@@ -70,24 +87,10 @@ const getUserDetails = async (req, res) => {
               phone: data.phone,
               veh_model: data.vehicle_make_model,
               status: data.status, // Include status in response data
+              ver_status: successCountMap[data.uid] || 0, // Include success count
             });
           }
-        } 
-        else if (statusQuery === 'rejected') {
-          // If filtering by rejected status, check if the UID is in the driverUIDs array
-          if (driverUIDs.includes(data.uid)) {
-            driverCount++;
-            DriverData.push({
-              name: data.fullname,
-              uid: data.uid,
-              email: data.email,
-              phone: data.phone,
-              veh_model: data.vehicle_make_model,
-              status: data.status, // Include status in response data
-            });
-          }
-        }
-        else {
+        } else {
           // Apply status filter if provided
           if (!statusQuery || data.status === statusQuery) {
             driverCount++;
@@ -98,6 +101,7 @@ const getUserDetails = async (req, res) => {
               phone: data.phone,
               veh_model: data.vehicle_make_model,
               status: data.status, // Include status in response data
+              ver_status: successCountMap[data.uid] || 0, // Include success count
             });
 
             if (data.status === "Vehicle data added") {
