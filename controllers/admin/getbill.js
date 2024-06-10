@@ -282,6 +282,9 @@ const getbill = async (req, res) => {
       const fname = trip.name;
       const email = trip.email;
       const date = trip.date;
+      const basefare = trip.base_fare;
+      const Additional_fares = trip.Additional_fares;
+      const paymentmethod = trip.Payment_method;
       const tariff = trip.Trip_fare + trip.Additional_fares;
       const distance = trip.distance;
       const billno = trip.billNumber;
@@ -296,6 +299,9 @@ const getbill = async (req, res) => {
           customer: fname,
           customer_email: email,
           date: date,
+          basefare: basefare,
+          Additional_fares: Additional_fares,
+          paymentmethod: paymentmethod,
           tariff: tariff,
           distance: distance,
           billNumber: billno,
