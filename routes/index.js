@@ -20,6 +20,7 @@ const postfare = require('../controllers/customer_info/postfare.js');
 const getfare = require('../controllers/customer_info/getfare.js');
 const alltrip = require('../controllers/admin/alltrip.js');
 const getfilter = require('../controllers/admin/getfilter.js');
+const getexcel = require('../controllers/admin/getreport.js');
 const cors = require('cors')
 // const admin_login = require('../controllers/admin/adminlog.js');
 module.exports = function(app) {
@@ -37,6 +38,7 @@ module.exports = function(app) {
     //admin accnt creation
     app.post('/adminpost', admin_post.register);
     app.get('/getebills', cors(), ebill.getbill);
+    app.get('/getexcel', cors(), getexcel.generateExcel);
     app.get('/getdriverrev', cors(), getdriverrev.getdriverrev);
     app.get('/getloc', cors(), getloc.getloc);
     app.get('/alltrip/:userId', alltrip.getalltrips);
