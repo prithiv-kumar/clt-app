@@ -69,23 +69,34 @@ const getbill = async (req, res) => {
       const fname = trip.name;
       const email = trip.email;
       const date = trip.date;
+      const Additional_fares = trip.Additional_fares;
+      const base_fare = trip.base_fare;   
+      const Payment_method = trip.Payment_method;
       const tariff = trip.Trip_fare + trip.Additional_fares;
       const distance = trip.distance;
       const billno = trip.billNumber;
+      
+      
 
       const userSnapshot = await usersCollection.where('uid', '==', uid).get(); // Fetch matching user data
       if (!userSnapshot.empty) {
         const userData = userSnapshot.docs[0].data();
         const fullname = userData.fullname; // Assuming 'fullname' field in users
+        const phone = userData.phone;
         console.log(`Full name for trip ${uid}: ${fullname}`); // Log the full name
         tripData.push({
           driver: fullname,
           customer: fname,
           customer_email: email,
           date: date,
+          Additional_fares: Additional_fares,
+          base_fare: base_fare,
+          Payment_method: Payment_method,
           tariff: tariff,
           distance: distance,
           billNumber: billno,
+          phone: phone
+
         });
       } else {
         console.warn(`User with UID ${uid} not found in users collection.`);
