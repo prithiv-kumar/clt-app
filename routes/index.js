@@ -103,7 +103,7 @@ const getexcel = require('../controllers/admin/getreport.js');
 const cors = require('cors');
 
 // Define the allowed frontend origin
-const frontendOrigin = 'http://3.91.86.142:80'; // Replace with the actual frontend IP or domain
+const frontendOrigin = 'http://3.91.86.142'; // Replace with the actual frontend IP or domain
 
 // CORS options
 const corsOptions = {
