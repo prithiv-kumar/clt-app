@@ -126,7 +126,7 @@ const getUserDetails = async (req, res) => {
         revenue += data2.Additional_fares + data2.Trip_fare;
       }
     }
-
+    const revenueString = revenue.toString();
     console.log(`Total Drivers: ${driverCount} , Trips: ${tripscount}`); // Log driver count to console
 
     res.send({
@@ -134,7 +134,7 @@ const getUserDetails = async (req, res) => {
       data: {
         drivers: driverCount,
         trips: tripscount,
-        revenue: revenue,
+        revenue: revenueString,
         pending: pending,
         Driverdata: paginatedDrivers, // Include paginated DriverData
         nextPage: nextPage, // Indicate if there is a next page with a boolean value
